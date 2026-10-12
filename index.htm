@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran PAI Kelas X - Berpikir Kritis & IPTEK</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        tech: {
+                            50: '#f0f9ff',
+                            500: '#0ea5e9',
+                            800: '#075985',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            line-height: 2.2;
+            direction: rtl;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .gradient-border {
+            border-image: linear-gradient(to right, #16a34a, #0ea5e9) 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-gradient-to-r from-emerald-900 via-teal-800 to-sky-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-emerald-500/20 p-2 rounded-xl backdrop-blur-sm border border-emerald-400/30">
+                        <i class="fa-solid me-0 fa-book-quran text-emerald-300 text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-base sm:text-lg leading-tight">PAI & Budi Pekerti Interaktif</h1>
+                        <p class="text-xs text-emerald-200">Kelas X Fase E • Berpikir Kritis & IPTEK</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('pendahuluan')" id="btn-pendahuluan" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white/10 text-white">
+                        <i class="fa-solid fa-compass mr-1"></i> Orientasi
+                    </button>
+                    <button onclick="switchTab('tilawah')" id="btn-tilawah" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/10 text-emerald-100">
+                        <i class="fa-solid fa-volume-high mr-1"></i> Tartil & Tajwid
+                    </button>
+                    <button onclick="switchTab('tadabbur')" id="btn-tadabbur" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/10 text-emerald-100">
+                        <i class="fa-solid fa-brain mr-1"></i> Tadabbur Ayat & Hadis
+                    </button>
+                    <button onclick="switchTab('deep-learning')" id="btn-deep-learning" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/10 text-emerald-100">
+                        <i class="fa-solid fa-seedling mr-1"></i> Deep Learning
+                    </button>
+                    <button onclick="switchTab('kuis')" id="btn-kuis" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/10 text-emerald-100">
+                        <i class="fa-solid fa-gamepad mr-1"></i> Evaluasi Interaktif
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-emerald-950 border-t border-emerald-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('pendahuluan'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-100 hover:bg-emerald-800 flex items-center">
+                <i class="fa-solid fa-compass w-6"></i> Orientasi & Pembelajaran
+            </button>
+            <button onclick="switchTab('tilawah'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-100 hover:bg-emerald-800 flex items-center">
+                <i class="fa-solid fa-volume-high w-6"></i> Tartil & Hukum Tajwid
+            </button>
+            <button onclick="switchTab('tadabbur'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-100 hover:bg-emerald-800 flex items-center">
+                <i class="fa-solid fa-brain w-6"></i> Tadabbur Ayat & Hadis
+            </button>
+            <button onclick="switchTab('deep-learning'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-100 hover:bg-emerald-800 flex items-center">
+                <i class="fa-solid fa-seedling w-6"></i> Deep Learning Concept
+            </button>
+            <button onclick="switchTab('kuis'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-100 hover:bg-emerald-800 flex items-center">
+                <i class="fa-solid fa-gamepad w-6"></i> Evaluasi Interaktif
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: ORIENTASI / PENDAHULUAN -->
+        <section id="tab-pendahuluan" class="tab-content block space-y-6 animate-fade-in">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-emerald-800 to-teal-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl font-serif select-none pointer-events-none">
+                    أُولِي الْأَلْبَابِ
+                </div>
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-400/20 text-emerald-300 border border-emerald-400/30">
+                        <i class="fa-solid fa-sparkles mr-1.5"></i> Pendekatan Deep Learning
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                        Membangun Generasi <span class="text-emerald-300">Ulul Albab</span> Melalui Berpikir Kritis & Penguasaan IPTEK
+                    </h2>
+                    <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed">
+                        Selamat datang di modul interaktif Pendidikan Agama Islam Fase E. Pembelajaran ini dirancang untuk melatih kesadaran bernalar (*Mindful*), pemahaman relevansi kehidupan (*Meaningful*), dan pengalaman belajar yang menyenangkan (*Joyful*).
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="switchTab('tilawah')" class="bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-semibold px-5 py-2.5 rounded-xl text-sm transition-all shadow-md hover:shadow-emerald-400/20 flex items-center">
+                            Mulai Belajar Tartil <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Capaian & Tujuan Pembelajaran Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tujuan 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-quran"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg mb-2">1. Membaca Tartil</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Membaca Q.S. Ali 'Imran/3: 190-191 serta Hadis terkait berpikir kritis dan IPTEK sesuai kaidah Tajwid dan Makhrajul Huruf.
+                    </p>
+                </div>
+
+                <!-- Tujuan 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-sky-100 text-sky-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg mb-2">2. Memahami Makna</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Menganalisis kandungan ayat dan hadis tentang pentingnya daya kritis, sains, dan teknologi dalam memajukan peradaban Islam.
+                    </p>
+                </div>
+
+                <!-- Tujuan 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg mb-2">3. Penerapan Karakter</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Menginternalisasi sikap Ulul Albab dalam menyikapi arus informasi, perkembangan AI, dan riset sains di kehidupan nyata.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: TARTIL & HUKUM TAJWID -->
+        <section id="tab-tilawah" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">Al-Qur'an Interaktif</span>
+                        <h2 class="text-2xl font-bold text-slate-800 mt-1">Q.S. Ali 'Imran/3: 190-191</h2>
+                        <p class="text-xs text-slate-500">Klik tombol audio untuk mendengarkan bacaan atau sentuh kata untuk melihat hukum tajwid.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="playAudio('surah-190')" id="btn-play-190" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-semibold flex items-center shadow-sm">
+                            <i class="fa-solid fa-play mr-2"></i> Putar Lantunan Q.S. 190-191
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ayat 190 Box -->
+                <div class="mb-8 p-6 bg-amber-50/40 rounded-2xl border border-amber-200/60">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Ayat 190</span>
+                        <span class="text-slate-400 text-xs">Penciptaan Alam & Pergantian Malam-Siang</span>
+                    </div>
+                    <!-- Arabic Text with Highlightable Words -->
+                    <div class="arabic-text text-2xl sm:text-3xl text-slate-800 text-right leading-loose mb-6">
+                        <span onclick="showTajwid('إِنَّ', 'Ghunnah Musyaddadah', 'Huruf Nun bertanda tasydid wajib dibaca mendengung 2 harakat.')" class="hover:bg-emerald-200 cursor-pointer px-1 rounded transition">إِنَّ</span> 
+                        <span onclick="showTajwid('فِي خَلْقِ', 'Ikhfa / Izhar', 'Membaca jelas dan pas sesuai makhraj huruf Kho.')" class="hover:bg-emerald-200 cursor-pointer px-1 rounded transition">فِي خَلْقِ</span> 
+                        <span onclick="showTajwid('السَّمَاوَاتِ وَالْأَرْضِ', 'Al-Syamsiyah & Al-Qamariyah', 'Al-Syamsiyah pada As-Samawati (lebur) dan Al-Qamariyah pada Al-Ardhi (jelas).')" class="hover:bg-emerald-200 cursor-pointer px-1 rounded transition">السَّمَاوَاتِ وَالْأَرْضِ</span> 
+                        <span onclick="showTajwid('وَاخْتِلَافِ', 'Madd Asli / Thabi\'i', 'Harakat Fathah diikuti Alif dibaca panjang 2 harakat.')" class="hover:bg-emerald-200 cursor-pointer px-1 rounded transition">وَاخْتِلَافِ</span> 
+                        <span onclick="showTajwid('اللَّيْلِ وَالنَّهَارِ', 'Al-Syamsiyah', 'Huruf Lam lebur ke dalam Lam dan Nun berikutnya.')" class="hover:bg-emerald-200 cursor-pointer px-1 rounded transition">اللَّيْلِ وَالنَّهَارِ</span> 
+                        <span onclick="showTajwid('لَآيَاتٍ لِّأُولِي', 'Idgham Bila Ghunnah', 'Tanwin Kasrah bertemu dengan huruf Lam dibaca melebur tanpa dengung.')" class="hover:bg-emerald-200 cursor-pointer text-emerald-800 font-bold px-1 rounded transition">لَآيَاتٍ لِّأُولِي</span> 
+                        <span onclick="showTajwid('الْأَلْبَابِ', 'Mad 'Arid Lissukun & Qalqalah Kubra', 'Mad bertemu sukun di akhir ayat (panjang 2-6 harakat) + Ba ber-sukun karena waqaf dibaca memantul kuat.')" class="hover:bg-emerald-200 cursor-pointer text-emerald-800 font-bold px-1 rounded transition">الْأَلْبَابِ</span> 
+                        ﴿١٩٠﴾
+                    </div>
+                    <div class="text-sm text-slate-700 italic border-t border-amber-200/60 pt-4">
+                        "Sesungguhnya dalam penciptaan langit dan bumi, dan pergantian malam dan siang terdapat tanda-tanda (kebesaran Allah) bagi orang yang berakal (Ulul Albab)."
+                    </div>
+                </div>
+
+                <!-- Ayat 191 Box -->
+                <div class="p-6 bg-emerald-50/40 rounded-2xl border border-emerald-200/60">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Ayat 191</span>
+                        <span class="text-slate-400 text-xs">Ciri Ulul Albab & Doa Reflektif</span>
+                    </div>
+                    <div class="arabic-text text-2xl sm:text-3xl text-slate-800 text-right leading-loose mb-6">
+                        <span onclick="showTajwid('الَّذِينَ يَذْكُرُونَ اللَّهَ', 'Mad Asli & Tafkhim', 'Lafazul Jalalah Allah dibaca tebal (Tafkhim) karena didahului harakat Dammah.')" class="hover:bg-emerald-200 cursor-pointer px-1 rounded transition">الَّذِينَ يَذْكُرُونَ اللَّهَ</span> 
+                        <span onclick="showTajwid('قِيَامًا وَقُعُودًا', 'Idgham Bighunnah', 'Tanwin Fathah bertemu Wawu dibaca melebur dengan mendengung.')" class="hover:bg-emerald-200 cursor-pointer text-emerald-800 font-bold px-1 rounded transition">قِيَامًا وَقُعُودًا</span> 
+                        <span onclick="showTajwid('وَعَلَىٰ جُنُوبِهِمْ وَيَتَفَكَّرُونَ', 'Izhar Syafawi', 'Mim Sukun bertemu Wawu dibaca jelas di bibir tanpa dengung.')" class="hover:bg-emerald-200 cursor-pointer text-emerald-800 font-bold px-1 rounded transition">وَعَلَىٰ جُنُوبِهِمْ وَيَتَفَكَّرُونَ</span> 
+                        <span>فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ</span> 
+                        <span onclick="showTajwid('رَبَّنَا مَا خَلَقْتَ', 'Qalqalah Sugra', 'Huruf Qaf sukun di tengah kata dibaca memantul ringan.')" class="hover:bg-emerald-200 cursor-pointer text-emerald-800 font-bold px-1 rounded transition">رَبَّنَا مَا خَلَقْتَ</span> 
+                        <span>هَٰذَا بَاطِلًا سُبْحَانَكَ فَقِنَا عَذَابَ النَّارِ</span> 
+                        ﴿١٩١﴾
+                    </div>
+                    <div class="text-sm text-slate-700 italic border-t border-emerald-200/60 pt-4">
+                        "(yaitu) orang-orang yang mengingat Allah sambil berdiri, duduk, atau dalam keadaan berbaring, dan mereka memikirkan tentang penciptaan langit dan bumi (seraya berkata), 'Ya Tuhan kami, tidaklah Engkau menciptakan semua ini sia-sia. Maha Suci Engkau, lindungilah kami dari azab neraka.'"
+                    </div>
+                </div>
+
+                <!-- Interactive Tajwid Detail Modal / Card -->
+                <div id="tajwid-card" class="mt-6 p-4 bg-slate-800 text-white rounded-xl flex items-start space-x-3 hidden transition-all">
+                    <div class="text-amber-400 text-xl pt-0.5"><i class="fa-solid fa-circle-info"></i></div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-center">
+                            <h4 id="tajwid-word" class="font-arabic text-xl font-bold text-emerald-300">Lafaz</h4>
+                            <span id="tajwid-rule" class="text-xs bg-slate-700 text-amber-300 font-semibold px-2.5 py-0.5 rounded">Hukum Tajwid</span>
+                        </div>
+                        <p id="tajwid-desc" class="text-xs sm:text-sm text-slate-300 mt-1">Klik salah satu potongan lafaz pada ayat di atas untuk mempelajari hukum bacaannya secara mendalam.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: TADABBUR AYAT & HADIS -->
+        <section id="tab-tadabbur" class="tab-content hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Ayat Analysis Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+                        <h3 class="font-bold text-slate-800 text-lg flex items-center">
+                            <i class="fa-solid fa-magnifying-glass-chart text-emerald-600 mr-2"></i> Kunci Penjelasan Ayat
+                        </h3>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md font-semibold">Q.S. Ali 'Imran: 190-191</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-emerald-800 text-sm mb-1"><i class="fa-solid fa-brain text-emerald-600 mr-1.5"></i> 1. Pengertian Ulul Albab</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Ulul Albab adalah orang-orang yang memiliki akal murni dan tajam. Mampu mengintegrasikan zikir (mengingat Allah) dan fikir (merenungkan fenomena alam semesta) secara seimbang.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-emerald-800 text-sm mb-1"><i class="fa-solid fa-arrows-split-up-and-left text-emerald-600 mr-1.5"></i> 2. Sikap Berpikir Kritis Islami</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Berpikir kritis bukan sekadar meragukan sesuatu, melainkan analisis objektif berbasis dalil, prinsip *tabayyun* (verifikasi), serta dorongan untuk mengungkap rahasia sains demi keagungan Ilahi.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-emerald-800 text-sm mb-1"><i class="fa-solid fa-shield-halved text-emerald-600 mr-1.5"></i> 3. Kesadaran "Tiada yang Sia-Sia"</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Setiap ciptaan Allah—mulai dari struktur atom hingga tata surya—memiliki hukum dan manfaat terukur (*Rabbana ma khalaqta hadza bathila*).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hadis Analysis Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+                        <h3 class="font-bold text-slate-800 text-lg flex items-center">
+                            <i class="fa-solid fa-scroll text-sky-600 mr-2"></i> Hadis Menuntut Ilmu & IPTEK
+                        </h3>
+                        <span class="text-xs bg-sky-100 text-sky-800 px-2.5 py-1 rounded-md font-semibold">HR. Muslim</span>
+                    </div>
+
+                    <!-- Hadis Matan -->
+                    <div class="bg-sky-50/50 p-5 rounded-2xl border border-sky-100 space-y-3">
+                        <div class="arabic-text text-xl sm:text-2xl text-slate-800 text-right leading-relaxed">
+                            مَنْ سَلَكَ طَرِيقًا يَطْلُبُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ طَرِيقًا إِلَى الْجَنَّةِ
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 italic">
+                            "Barangsiapa menempuh suatu jalan untuk menuntut ilmu, maka Allah akan memudahkan baginya jalan menuju surga." (HR. Muslim)
+                        </p>
+                    </div>
+
+                    <!-- Poin Penting Hadis -->
+                    <div class="space-y-3">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-sky-800 text-sm mb-1"><i class="fa-solid fa-road text-sky-600 mr-1.5"></i> Jalan Menuju Keunggulan</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                "Menempuh jalan" bermakna fisik (pergi ke sekolah/laboratorium) maupun metode (riset, eksperimen, literasi digital). Penguasaan IPTEK adalah kewajiban kolektif (*Fardhu Kifayah*).
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-sky-800 text-sm mb-1"><i class="fa-solid fa-award text-sky-600 mr-1.5"></i> Dampak Peradaban</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Cendekiawan Muslim masa lalu seperti Ibnu Sina (Kedokteran) dan Al-Khawarizmi (Matematika) membuktikan bahwa sains modern dipicu oleh semangat memahami Al-Qur'an.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: METODE DEEP LEARNING (Mindful, Meaningful, Joyful) -->
+        <section id="tab-deep-learning" class="tab-content hidden space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2 mb-6">
+                <span class="text-xs font-semibold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full">Kerangka Pembelajaran</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">Pendekatan Deep Learning PAI</h2>
+                <p class="text-xs sm:text-sm text-slate-500">Mewujudkan pengalaman belajar yang utuh melalui 3 pilar utama untuk peserta didik Fase E.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Mindful -->
+                <div class="bg-gradient-to-b from-emerald-500 to-emerald-700 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl font-bold mb-4">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">1. MINDFUL</h3>
+                        <p class="text-xs text-emerald-100 leading-relaxed mb-4">
+                            Kesadaran Penuh & Tafakur Alam.
+                        </p>
+                        <ul class="text-xs text-emerald-100 space-y-2 list-disc list-inside">
+                            <li>Mengamati keharmonisan ekosistem alam.</li>
+                            <li>Melatih kesadaran saat membaca Al-Qur'an (khusyuk & fokus).</li>
+                            <li>Kritis terhadap informasi sebelum membagikan (Saring sebelum Sharing).</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-emerald-400/30 text-xs font-semibold">
+                        Aksi: Latihan Tabayyun Informasi
+                    </div>
+                </div>
+
+                <!-- Meaningful -->
+                <div class="bg-gradient-to-b from-sky-500 to-sky-700 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl font-bold mb-4">
+                            <i class="fa-solid fa-link"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">2. MEANINGFUL</h3>
+                        <p class="text-xs text-sky-100 leading-relaxed mb-4">
+                            Kebermaknaan & Kontekstualisasi IPTEK.
+                        </p>
+                        <ul class="text-xs text-sky-100 space-y-2 list-disc list-inside">
+                            <li>Menghubungkan ayat Al-Qur'an dengan penemuan sains modern.</li>
+                            <li>Memahami bahwa belajar matematika, fisika, & koding adalah bagian dari ibadah.</li>
+                            <li>Pemanfaatan AI untuk kebaikan kemanusiaan.</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sky-400/30 text-xs font-semibold">
+                        Aksi: Proyek Inovasi IPTEK Maslahat
+                    </div>
+                </div>
+
+                <!-- Joyful -->
+                <div class="bg-gradient-to-b from-purple-500 to-purple-700 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl font-bold mb-4">
+                            <i class="fa-solid fa-face-smile"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">3. JOYFUL</h3>
+                        <p class="text-xs text-purple-100 leading-relaxed mb-4">
+                            Pembelajaran Menyenangkan & Kolaboratif.
+                        </p>
+                        <ul class="text-xs text-purple-100 space-y-2 list-disc list-inside">
+                            <li>Kuis gamifikasi interaktif dan tantangan tajwid.</li>
+                            <li>Diskusi kelompok studi kasus terkini.</li>
+                            <li>Apresiasi kreasi karya ilmiah berbantu teknologi.</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-purple-400/30 text-xs font-semibold">
+                        Aksi: Kuis & Gim Simulasi
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: EVALUASI KUIS INTERAKTIF -->
+        <section id="tab-kuis" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 max-w-3xl mx-auto">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                    <div>
+                        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-widest">Uji Pemahaman</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Evaluasi Formatif Interaktif</h2>
+                    </div>
+                    <div id="quiz-score-badge" class="bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm flex items-center">
+                        <i class="fa-solid fa-trophy text-amber-500 mr-1.5"></i> Skor: <span id="current-score" class="ml-1">0</span>/100
+                    </div>
+                </div>
+
+                <!-- Quiz Progress Bar -->
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-6">
+                    <div id="quiz-progress" class="bg-emerald-500 h-full w-1/10 transition-all duration-300"></div>
+                </div>
+
+                <!-- Quiz Card Content -->
+                <div id="quiz-container" class="space-y-6">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span>Soal <span id="question-number">1</span> dari 10</span>
+                        <span id="question-category" class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Tajwid</span>
+                    </div>
+
+                    <h3 id="question-text" class="text-base sm:text-lg font-bold text-slate-800 leading-snug">
+                        Memuat pertanyaan...
+                    </h3>
+
+                    <div id="options-container" class="space-y-3">
+                        <!-- Options will be rendered dynamically via JS -->
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div id="feedback-box" class="hidden p-4 rounded-xl text-sm leading-relaxed"></div>
+
+                    <!-- Next Button -->
+                    <div class="flex justify-end pt-2">
+                        <button id="btn-next-question" onclick="nextQuestion()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow-sm">
+                            Soal Selanjutnya <i class="fa-solid fa-arrow-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Result Screen (Hidden by default) -->
+                <div id="quiz-result" class="hidden text-center py-8 space-y-4">
+                    <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mx-auto">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">Evaluasi Selesai!</h3>
+                    <p class="text-slate-600 text-sm">
+                        Skor Akhir Anda: <span id="final-score" class="font-extrabold text-2xl text-emerald-600">0</span>
+                    </p>
+                    <p id="result-message" class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+                        Pesan apresiasi...
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="restartQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow">
+                            <i class="fa-solid fa-rotate-right mr-2"></i> Ulangi Kuis
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p>© 2026 Media Pembelajaran Interaktif PAI & Budi Pekerti Kelas X Fase E.</p>
+            <p class="text-slate-500">Berpikir Kritis & Mengembangkan IPTEK • Kurikulum Merdeka (Pendekatan Deep Learning)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            const selectedTab = document.getElementById('tab-' + tabId);
+            if (selectedTab) {
+                selectedTab.classList.remove('hidden');
+            }
+
+            // Update Header Buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-white/10', 'text-white');
+                btn.classList.add('text-emerald-100');
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-white/10', 'text-white');
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Tajwid Card Interactivity
+        function showTajwid(word, rule, desc) {
+            const card = document.getElementById('tajwid-card');
+            document.getElementById('tajwid-word').innerText = word;
+            document.getElementById('tajwid-rule').innerText = rule;
+            document.getElementById('tajwid-desc').innerText = desc;
+            card.classList.remove('hidden');
+        }
+
+        // Speech Audio Simulation
+        function playAudio(type) {
+            const btn = document.getElementById('btn-play-190');
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const text = "Inna fii khalqis samawaati wal ardhi wakhtilaafil laili wan nahari la aayaatil li ulil albab.";
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.8;
+                
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Memutar Audio...';
+                
+                utterance.onend = function() {
+                    btn.innerHTML = '<i class="fa-solid fa-play mr-2"></i> Putar Lantunan Q.S. 190-191';
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Browser Anda tidak mendukung pemutaran suara sintesis.");
+            }
+        }
+
+        // Kuis Data & Logic
+        const quizData = [
+            {
+                question: "Dalam Q.S. Ali 'Imran/3: 190, Allah SWT berfirman mengenai penciptaan langit dan bumi serta pergantian malam dan siang. Istilah أُولِي الْأَلْبَابِ dalam ayat tersebut merujuk kepada...",
+                options: [
+                    "Orang-orang yang berakal murni dan tajam dalam berpikir kritis",
+                    "Orang yang rajin beribadah tanpa ilmu",
+                    "Para pemimpin pemerintahan",
+                    "Ahli strategi perang"
+                ],
+                correct: 0,
+                explanation: "Ulul Albab merujuk kepada orang yang memiliki pemikiran mendalam, murni, dan mampu menghubungkan zikir serta pikir.",
+                category: "Pemahaman Ayat"
+            },
+            {
+                question: "Berdasarkan Q.S. Ali 'Imran/3: 191, aktivitas utama yang dilakukan oleh أُولِي الْأَلْبَابِ dalam berbagai kondisi adalah...",
+                options: [
+                    "Mengingat Allah SWT (zikir) dan memikirkan penciptaan alam (fikir)",
+                    "Menumpuk harta untuk masa depan",
+                    "Menghabiskan waktu dengan berdiskusi tanpa aksi",
+                    "Tidur dan beristirahat secara teratur"
+                ],
+                correct: 0,
+                explanation: "Ciri khas Ulul Albab adalah senantiasa berzikir dalam keadaan berdiri, duduk, maupun berbaring serta bertafakur atas sains/alam.",
+                category: "Karakter Ulul Albab"
+            },
+            {
+                question: "Sikap kritis seorang pelajar Muslim dalam menghadapi arus disinformasi (hoaks) di media sosial paling tepat dicerminkan melalui prinsip...",
+                options: [
+                    "Tabayyun atau melakukan verifikasi secara teliti",
+                    "Langsung membagikan berita agar menjadi yang pertama",
+                    "Mengabaikan semua jenis berita di internet",
+                    "Mempercayai informasi dari grup pesan singkat secara langsung"
+                ],
+                correct: 0,
+                explanation: "Tabayyun adalah prinsip dasar berpikir kritis dalam Islam untuk meneliti kebenaran sebuah informasi.",
+                category: "Penerapan IPTEK"
+            },
+            {
+                question: "Dalam ilmu tajwid, ketika membaca lafaz إِنَّ pada awal Q.S. Ali 'Imran ayat 190, hukum bacaan yang berlaku adalah...",
+                options: [
+                    "Ghunnah musyaddadah dengan mendengungkan suara",
+                    "Izhar Halqi dibaca jelas",
+                    "Ikhfa Hakiki dibaca samar",
+                    "Mad Arid Lissukun dibaca panjang"
+                ],
+                correct: 0,
+                explanation: "Setiap Nun atau Mim yang bertanda tasydid memiliki hukum Ghunnah Musyaddadah dan dibaca mendengung 2 harakat.",
+                category: "Tajwid"
+            },
+            {
+                question: "Penerapan aspek Meaningful (Kebermaknaan) pada materi IPTEK dalam pendekatan Deep Learning PAI adalah...",
+                options: [
+                    "Menghubungkan ilmu sains dengan nilai kebermanfaatan hidup dan keimanan",
+                    "Hanya menghafal rumus sains tanpa memahami gunanya",
+                    "Mengerjakan soal kuis secepat mungkin",
+                    "Membaca materi tanpa diskusi"
+                ],
+                correct: 0,
+                explanation: "Aspek Meaningful membantu siswa menyadari relevansi ilmu sains terhadap penguatan iman dan kebaikan bagi masyarakat.",
+                category: "Deep Learning"
+            },
+            {
+                question: "Hadis Nabi SAW manguatkan bahwa orang yang menempuh jalan menuntut ilmu akan...",
+                options: [
+                    "Dimudahkan jalannya menuju surga oleh Allah SWT",
+                    "Pasti menjadi orang terkaya di dunianya",
+                    "Bebas dari semua ujian hidup",
+                    "Mendapatkan gelar kehormatan secara otomatis"
+                ],
+                correct: 0,
+                explanation: "HR. Muslim menegaskan keutamaan besar penuntut ilmu yakni kemudahan jalan menuju surga.",
+                category: "Hadis IPTEK"
+            },
+            {
+                question: "Kesimpulan doa penutup Ulul Albab dalam akhir Q.S. Ali 'Imran/3: 191 adalah permohonan agar...",
+                options: [
+                    "Diselamatkan dari azab neraka setelah menyadari keagungan ciptaan Allah",
+                    "Diberikan kelimpahan harta kekayaan",
+                    "Diberikan jabatan yang tinggi di masyarakat",
+                    "Diberikan umur yang sangat panjang"
+                ],
+                correct: 0,
+                explanation: "Ungkapan 'Subhanaka faqina 'adzaban-nar' merupakan bentuk kepasrahan dan permohonan perlindungan dari neraka.",
+                category: "Tadabbur"
+            },
+            {
+                question: "Hubungan yang harmonis antara agama (Islam) dan ilmu pengetahuan modern (IPTEK) dapat dianalogikan sebagai...",
+                options: [
+                    "Dua sisi mata uang yang saling menguatkan keimanan dan peradaban",
+                    "Dua hal yang saling berbenturan dan tidak bersatu",
+                    "Hal yang hanya berlaku bagi ilmuwan barat",
+                    "Sesuatu yang tidak penting untuk dipelajari"
+                ],
+                correct: 0,
+                explanation: "Islam mendorong penguasaan sains, dan sains memperkokoh bukti-bukti keagungan ayat-ayat Allah.",
+                category: "Integrasi Sains"
+            },
+            {
+                question: "Tindakan bijak berlandaskan berpikir kritis Islami dalam merespons perkembangan Artificial Intelligence (AI) adalah...",
+                options: [
+                    "Memanfaatkan AI untuk kebaikan kemanusiaan serta menyaring konten negatif",
+                    "Menolak seluruh kemajuan teknologi digital",
+                    "Menggunakan AI untuk melakukan kecurangan akademik",
+                    "Menyerahkan seluruh keputusan hidup kepada AI"
+                ],
+                correct: 0,
+                explanation: "Etika pemanfaatan teknologi menurut prinsip Islami berfokus pada kemaslahatan umum (*maslahah*) dan menjauhi kemudaratan.",
+                category: "Etika Digital"
+            },
+            {
+                question: "Tujuan utama pembelajaran membaca Al-Qur'an dengan tartil bagi peserta didik Fase E adalah...",
+                options: [
+                    "Menjaga keotentikan bacaan sekaligus meresapi makna mendalam ayat",
+                    "Hanya mengejar kecepatan khatam Al-Qur'an",
+                    "Agar dinilai bagus oleh teman sebaya",
+                    "Mendapatkan hadiah pujian saja"
+                ],
+                correct: 0,
+                explanation: "Membaca tartil (sesuai kaidah tajwid) memfasilitasi tadabbur dan penghayatan pesan Ilahi.",
+                category: "Tajwid & Tartil"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadQuestion() {
+            answered = false;
+            const q = quizData[currentQuestionIndex];
+            
+            document.getElementById('question-number').innerText = currentQuestionIndex + 1;
+            document.getElementById('question-category').innerText = q.category;
+            document.getElementById('question-text').innerText = q.question;
+            document.getElementById('quiz-progress').style.width = ((currentQuestionIndex + 1) / quizData.length * 100) + '%';
+            
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.classList.add('hidden');
+            document.getElementById('btn-next-question').classList.add('hidden');
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            // Shuffle display options maintaining logic
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition text-sm flex items-start space-x-3';
+                btn.onclick = () => selectOption(idx);
+                btn.innerHTML = `
+                    <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">${String.fromCharCode(65 + idx)}</span>
+                    <span class="text-slate-700 leading-snug">${opt}</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(index) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[currentQuestionIndex];
+            const options = document.getElementById('options-container').children;
+            const feedbackBox = document.getElementById('feedback-box');
+
+            if (index === q.correct) {
+                score += 10;
+                document.getElementById('current-score').innerText = score;
+                options[index].classList.remove('border-slate-200', 'hover:bg-slate-50');
+                options[index].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+                
+                feedbackBox.className = "p-4 rounded-xl text-sm leading-relaxed bg-emerald-50 border border-emerald-200 text-emerald-800";
+                feedbackBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> <strong>Benar!</strong> ${q.explanation}`;
+            } else {
+                options[index].classList.remove('border-slate-200', 'hover:bg-slate-50');
+                options[index].classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+                
+                options[q.correct].classList.remove('border-slate-200');
+                options[q.correct].classList.add('border-emerald-500', 'bg-emerald-50');
+
+                feedbackBox.className = "p-4 rounded-xl text-sm leading-relaxed bg-rose-50 border border-rose-200 text-rose-800";
+                feedbackBox.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-2"></i> <strong>Kurang Tepat.</strong> ${q.explanation}`;
+            }
+
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('btn-next-question').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resultScreen = document.getElementById('quiz-result');
+            resultScreen.classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = score;
+            const msg = document.getElementById('result-message');
+            
+            if (score >= 80) {
+                msg.innerText = "MasyaAllah! Pemahaman Anda sangat tajam layaknya karakteristik Ulul Albab. Pertahankan ketelitian dan daya kritis Islami!";
+            } else if (score >= 60) {
+                msg.innerText = "Alhamdulillah! Hasil yang cukup baik. Mari tingkatkan lagi pemahaman tajwid dan tadabbur ayatnya.";
+            } else {
+                msg.innerText = "Tetap semangat! Anda dapat mengulangi modul Tartil dan Tadabbur untuk memperkuat pemahaman.";
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        // Initialize App
+        window.onload = function() {
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>
